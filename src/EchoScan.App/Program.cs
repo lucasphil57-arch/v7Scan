@@ -1,4 +1,4 @@
-using System.IO.Compression;
+﻿using System.IO.Compression;
 using EchoScan.Core;
 
 Console.Title = "EchoScan";

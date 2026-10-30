@@ -1,4 +1,4 @@
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace EchoScan.Core;
 
@@ -47,8 +47,9 @@ public static class Native {
         if (!File.Exists(path)) return false;
         var fi = new FileInfo { cbStruct = (uint)Marshal.SizeOf<FileInfo>(), filePath = Marshal.StringToHGlobalUni(path) };
         var td = new TrustData { cbStruct = (uint)Marshal.SizeOf<TrustData>(), uiChoice = 2, unionChoice = 1, file = Marshal.AllocHGlobal(Marshal.SizeOf<FileInfo>()), stateAction = 0, provFlags = 0x10 };
-        try { Marshal.StructureToPtr(fi, td.file, false); return WinVerifyTrust(IntPtr.Zero, ref Action, ref td) == 0; }
+        try { Marshal.StructureToPtr(fi, td.file, false); var act = Action; return WinVerifyTrust(IntPtr.Zero, ref act, ref td) == 0; }
         catch { return false; }
         finally { Marshal.FreeHGlobal(fi.filePath); Marshal.FreeHGlobal(td.file); }
     }
 }
+

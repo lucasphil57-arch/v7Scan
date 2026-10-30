@@ -1,4 +1,4 @@
-namespace EchoScan.Core.Collectors;
+﻿namespace EchoScan.Core.Collectors;
 
 public static class FiveM {
     static string Root => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM");

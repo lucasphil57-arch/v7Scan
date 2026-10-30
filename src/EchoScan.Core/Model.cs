@@ -1,4 +1,4 @@
-namespace EchoScan.Core;
+﻿namespace EchoScan.Core;
 
 public enum Severity { Info = 0, Low = 1, Medium = 2, High = 3, Critical = 4 }
 
@@ -20,6 +20,6 @@ public class Report {
     public bool Admin { get; set; }
     public Dictionary<string, object> Data { get; set; } = new();
     public List<Finding> Findings { get; set; } = new();
-    public int Score => Findings.Sum(f => (int)f.Severity);
-    public string Verdict => Score switch { 0 => "clean", <= 3 => "douteux", <= 8 => "suspect", _ => "compromis" };
+    public int Score => Findings.Where(f => f.Severity >= Severity.Medium).Sum(f => (int)f.Severity);
+    public string Verdict => Score switch { 0 => "clean", <= 4 => "douteux", <= 10 => "suspect", _ => "compromis" };
 }
