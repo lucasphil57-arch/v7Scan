@@ -20,6 +20,7 @@ public static class Scanner {
         S("handles ouverts"); Safe(() => Handles.Run(r));
         S("reseau"); Safe(() => Network.Run(r));
         S("parcours disque"); Safe(() => DiskWalk.Run(r));
+        S("artefacts systeme"); Safe(() => Artifacts.Run(r));
         S("artefacts FiveM"); Safe(() => FiveM.Run(r));
 
         r.Findings = r.Findings
@@ -30,3 +31,4 @@ public static class Scanner {
     }
     static void Safe(Action a) { try { a(); } catch { } }
 }
+
