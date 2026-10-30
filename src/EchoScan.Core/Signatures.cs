@@ -29,7 +29,8 @@ public static class SignatureDb {
     }
     public static Signature Match(string text) {
         if (string.IsNullOrWhiteSpace(text)) return null;
-        var l = text.ToLowerInvariant();
-        return All.FirstOrDefault(s => l.Contains(s.Name));
+        var l = text.ToLowerInvariant().Trim();
+        return All.FirstOrDefault(s => l == s.Name || l.StartsWith(s.Name + ".") || l.StartsWith(s.Name + "_") || l.StartsWith(s.Name + "-") || l.StartsWith(s.Name + " "));
     }
 }
+

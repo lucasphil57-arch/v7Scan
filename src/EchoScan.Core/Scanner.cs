@@ -14,6 +14,7 @@ public static class Scanner {
 
         S("bus PCIe"); Safe(() => PciTree.Run(r));
         S("materiel"); Safe(() => Hardware.Run(r));
+        S("configuration systeme"); Safe(() => SystemInfo.Run(r));
         S("pilotes et modules noyau"); Safe(() => Drivers.Run(r));
         S("processus"); Safe(() => Processes.Run(r));
         S("logiciels installes"); Safe(() => Software.Run(r));
@@ -31,4 +32,5 @@ public static class Scanner {
     }
     static void Safe(Action a) { try { a(); } catch { } }
 }
+
 

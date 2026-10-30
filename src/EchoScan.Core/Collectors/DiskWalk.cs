@@ -42,6 +42,8 @@ public static class DiskWalk {
         if (isDir) name = Path.GetFileName(path);
         var sig = SignatureDb.Match(name);
         if (sig is null || !seen.Add(path)) return false;
+        var key = sig.Name + "|" + Path.GetDirectoryName(path);
+        if (!seen.Add(key)) return isDir;
         hits.Add(new { chemin = path, label = sig.Label, categorie = sig.Category });
         r.Findings.Add(new Finding {
             Collector = "disque", Category = sig.Category,
@@ -52,3 +54,4 @@ public static class DiskWalk {
         return isDir;
     }
 }
+
